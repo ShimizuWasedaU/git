@@ -8,7 +8,7 @@ date_default_timezone_set("Etc/GMT-9");
 //database credentials
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','375032');
+define('DBPASS','');
 define('DBNAME','labbooksystem');
 
 //application address
