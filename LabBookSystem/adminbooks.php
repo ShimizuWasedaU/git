@@ -354,7 +354,6 @@ require('layout/adminheader.php');
                                                         <li><a href="javascript:edit('.$bookid.')"><i class="fa fa-pencil"></i> Edit</a></li>
                                                         <li><a href="adminbooks.php?action=delete&bookid='.$bookid.'"><span class="glyphicon glyphicon-trash"></span>Delete</a></li>
 														<li><a href="adminbooks.php?action=borrow&bookid='.$bookid.'"><i class="fa fa-shopping-cart"></i>Borrow</a></li>
-														<li><a href=""><i class="fa fa-tags"></i>Tags</a></li>
                                                         </ul>
                                                         </div>
 	                                                    </td>';	

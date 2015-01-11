@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
 }
 
 //define page title
-$title = 'Reset Account';
+$title = 'Get Account';
 
 //include header template
 require('layout/header.php'); 
@@ -57,7 +57,7 @@ require('layout/header.php');
 		 <div class="panel panel-default" style="box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 10px;">
 		   <div class="panel-body">
 			<form role="form" method="post" action="" autocomplete="off">
-				<h2>Reset Password</h2>
+				<h2>Get Password</h2>
 				<p><a href='login.php'>Back to login page</a></p>
 				<hr>
 
