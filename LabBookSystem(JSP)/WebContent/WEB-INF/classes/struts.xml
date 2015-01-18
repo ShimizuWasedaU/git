@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+      "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+      "http://struts.apache.org/dtds/struts-2.0.dtd">
+  <struts>
+
+      <package name="struts2" namespace=""
+          extends="struts-default">
+          
+          <action name="register" class="labbook.action.UserRegisterAction">
+              <result name="success">/register.jsp</result>
+              <result name="fail">/register.jsp</result>
+          </action>
+          
+           <action name="login" class="labbook.action.UserLoginAction">
+              <result name="success">/memberpage.jsp</result>
+              <result name="adminsuccess">/adminpage.jsp</result>
+              <result name="fail">/login.jsp</result>
+          </action>
+          
+           <action name="logout" class="labbook.action.UserLogoutAction">
+              <result name="success">/login.jsp</result>
+              <result name="fail">/login.jsp</result>
+          </action>
+          
+          
+           <action name="modify" class="labbook.action.UserModifyAction">
+              <result name="success">/memberpage.jsp</result>
+              <result name="adminsuccess">/adminpage.jsp</result>
+              <result name="fail">/memberpage.jsp</result>
+              <result name="adminfail">/adminpage.jsp</result>
+          </action>
+          
+           <action name="listbook" class="labbook.action.BookListAction">
+              <result name="success">/memberbook.jsp</result>
+              <result name="adminsuccess">/adminbook.jsp</result>
+              <result name="fail">/memberbook.jsp</result>
+          </action>
+          
+          <action name="borrowbook" class="labbook.action.BookBorrowAction">
+              <result name="success" type="chain">listbook</result>
+              <result name="fail" type="chain">listbook</result>
+          </action>
+          
+          <action name="listrecord" class="labbook.action.RecordListAction">
+              <result name="success">/memberrecord.jsp</result>
+              <result name="adminsuccess">/adminrecord.jsp</result>
+              <result name="fail">/memberrecord.jsp</result>
+          </action>
+          
+            <action name="listallrecord" class="labbook.action.UsersRecordListAction">
+              <result name="adminsuccess">/usersrecord.jsp</result>
+              <result name="fail">/usersrecord.jsp</result>
+           </action>
+          
+           <action name="returnbook" class="labbook.action.BookReturnAction">
+              <result name="success" type="chain">listrecord</result>
+               <result name="usersuccess" type="chain">listallrecord</result>
+              <result name="fail" type="chain">listrecord</result>
+          </action>
+          
+           <action name="deleterecord" class="labbook.action.RecordDeleteAction">
+              <result name="adminsuccess" type="chain">listallrecord</result>
+              <result name="fail" type="chain">listallrecord</result>
+           </action>
+           
+           <action name="listusers" class="labbook.action.UserListAction">
+              <result name="adminsuccess">/adminusers.jsp</result>
+              <result name="fail">/adminusers.jsp</result>
+           </action>
+           
+           <action name="adduser" class="labbook.action.UserAddAction">
+              <result name="adminsuccess" type="chain">listusers</result>
+              <result name="fail" type="chain">listusers</result>
+           </action>
+           
+            <action name="deleteuser" class="labbook.action.UserDeleteAction">
+              <result name="adminsuccess" type="chain">listusers</result>
+              <result name="fail" type="chain">listusers</result>
+           </action>
+           
+            <action name="makeadmin" class="labbook.action.MakeAdminAction">
+              <result name="adminsuccess" type="chain">listusers</result>
+              <result name="fail" type="chain">listusers</result>
+           </action>
+           
+           <action name="edituser" class="labbook.action.UserEditAction">
+              <result name="adminsuccess" type="chain">listusers</result>
+              <result name="fail" type="chain">listusers</result>
+           </action>
+           
+           <action name="deletebook" class="labbook.action.BookDeleteAction">
+              <result name="success" type="chain">listbook</result>
+              <result name="fail" type="chain">listbook</result>
+          </action>
+          
+           <action name="addbook" class="labbook.action.BookAddAction">
+              <result name="success" type="chain">listbook</result>
+              <result name="fail" type="chain">listbook</result>
+          </action>
+           
+           <action name="editbook" class="labbook.action.BookEditAction">
+              <result name="success" type="chain">listbook</result>
+              <result name="fail" type="chain">listbook</result>
+          </action>
+      </package>
+  </struts>

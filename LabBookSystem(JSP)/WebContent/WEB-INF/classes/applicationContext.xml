@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+
+
+<!--   configure sessionFactory 
+  --> 
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+       <property name="configLocation">
+          <value>classpath:hibernate.cfg.xml</value> 
+       </property>
+    </bean>
+
+	
+	<bean id="UserDao" class="labbook.dao.impl.UserDaoImpl">
+	   <property name="sessionFactory">
+         <ref bean="sessionFactory"/>
+       </property>
+	</bean>
+	<bean id="BookDao" class="labbook.dao.impl.BookDaoImpl">
+	   <property name="sessionFactory">
+         <ref bean="sessionFactory"/>
+       </property>
+	</bean>
+	<bean id="RecordDao" class="labbook.dao.impl.RecordDaoImpl">
+	   <property name="sessionFactory">
+         <ref bean="sessionFactory"/>
+       </property>
+	</bean>
+	<bean id="UserService" class="labbook.service.impl.UserServiceImpl">
+	    <property name="RecordDao">
+			<ref bean="RecordDao"/>
+		</property>
+		<property name="UserDao">
+			<ref bean="UserDao"/>
+		</property>
+		<property name="BookDao">
+			<ref bean="BookDao"/>
+		</property>
+	</bean>
+	<bean id="BookService" class="labbook.service.impl.BookServiceImpl">
+	    <property name="RecordDao">
+			<ref bean="RecordDao"/>
+		</property>
+		<property name="BookDao">
+			<ref bean="BookDao"/>
+		</property>
+	</bean>
+	<bean id="RecordService" class="labbook.service.impl.RecordServiceImpl">
+		<property name="RecordDao">
+			<ref bean="RecordDao"/>
+		</property>
+		<property name="UserDao">
+			<ref bean="UserDao"/>
+		</property>
+		<property name="BookDao">
+			<ref bean="BookDao"/>
+		</property>
+	</bean>				
+	<bean id="loginAction" class="labbook.action.UserLoginAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>	
+	<bean id="registerAction" class="labbook.action.UserRegisterAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>	
+	<bean id="modifyAction" class="labbook.action.UserModifyAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>	
+	<bean id="ListBookAction" class="labbook.action.BookListAction">
+		<property name="BookService">
+			<ref bean="BookService"/>
+		</property>
+	</bean>
+	<bean id="borrowBookAction" class="labbook.action.BookBorrowAction">
+		<property name="RecordService">
+			<ref bean="RecordService"/>
+		</property>	
+	</bean>
+	<bean id="ListRecordAction" class="labbook.action.RecordListAction">
+		<property name="RecordService">
+			<ref bean="RecordService"/>
+		</property>
+	</bean>
+	<bean id="ListUsersRecordAction" class="labbook.action.UsersRecordListAction">
+		<property name="RecordService">
+			<ref bean="RecordService"/>
+		</property>
+	</bean>
+	<bean id="returnBookAction" class="labbook.action.BookReturnAction">
+		<property name="RecordService">
+			<ref bean="RecordService"/>
+		</property>	
+	</bean>
+	<bean id="deleteRecordAction" class="labbook.action.RecordDeleteAction">
+		<property name="RecordService">
+			<ref bean="RecordService"/>
+		</property>	
+	</bean>
+	<bean id="ListUserAction" class="labbook.action.UserListAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>
+	<bean id="addUserAction" class="labbook.action.UserAddAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>
+	<bean id="deleteUserAction" class="labbook.action.UserDeleteAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>
+	<bean id="makeadminAction" class="labbook.action.MakeAdminAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>
+	<bean id="usereditAction" class="labbook.action.UserEditAction">
+		<property name="UserService">
+			<ref bean="UserService"/>
+		</property>
+	</bean>
+	<bean id="deleteBookAction" class="labbook.action.BookDeleteAction">
+		<property name="BookService">
+			<ref bean="BookService"/>
+		</property>	
+	</bean>
+	<bean id="addBookAction" class="labbook.action.BookAddAction">
+		<property name="BookService">
+			<ref bean="BookService"/>
+		</property>	
+	</bean>
+	<bean id="editBookAction" class="labbook.action.BookEditAction">
+		<property name="BookService">
+			<ref bean="BookService"/>
+		</property>	
+	</bean>
+</beans>
