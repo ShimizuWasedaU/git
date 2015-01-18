@@ -77,7 +77,7 @@ require('layout/memberheader.php');
                                             <th>ISBN</th>
                                             <th>Writer</th>
                                             <th>Publisher</th>
-											<th>Tags</th>
+											<th>Price</th>
                                             <th>Shelf</th>
 											<th>Available</th>
 											<th>Action</th>
@@ -105,7 +105,7 @@ require('layout/memberheader.php');
 												if($row['available']==0){echo "<td>"."YES"."</td>";}else{echo "<td>"."NO"."</td>";}
 												echo '<td>
 						<div class="panel-body">
-                            <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal'.$bookid.'">
+                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal'.$bookid.'">
                               <i class="fa fa-shopping-cart "></i>Borrow
                             </button>
                             <div class="modal fade" id="myModal'.$bookid.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

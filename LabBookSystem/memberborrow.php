@@ -11,7 +11,7 @@ $title = 'Members Page';
 if(isset($_GET['record'])){
 	$recordid=$_GET['record'];
 	$time=date("Y/m/d H:i:s");
-	$sql = "UPDATE book b, record r SET r.return_date='$time', returned=true, b.available=0 WHERE record_id='$recordid' and b.book_id=r.book_id";
+	$sql = "UPDATE book b, record r SET r.return_date='$time', returned=true, b.available=0 WHERE record_id='$recordid' and b.book_id=r.book_id and r.returned=0";
             if ($db->query($sql) === TRUE) {
             } else {
                echo "Error: " . $sql . "<br>" . $conn->error;
@@ -165,7 +165,7 @@ require('layout/memberheader.php');
 													<!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Solved Borrow Record
+                            Unsolved Borrow Record
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

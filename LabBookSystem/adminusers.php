@@ -155,6 +155,17 @@ if(isset($_POST['submit'])&&isset($_POST['action'])&&$_POST['action']=='add'){
 //if delete button has been clicked process it
 if(isset($_GET['userid'])&&isset($_GET['action'])&&$_GET['action']=='delete'){
 	$userid=$_GET['userid'];
+	 $sql="UPDATE book b, record r SET b.available=0 WHERE b.book_id=r.book_id and r.user_id='$userid' and r.returned=false";
+     if ($db->query($sql) === TRUE) {
+            } else {
+               echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+	 $sql="DELETE FROM record WHERE user_id='$userid'";
+     if ($db->query($sql) === TRUE) {
+            } else {
+               echo "Error: " . $sql . "<br>" . $conn->error;
+            }	
+	
 	$sql = "DELETE FROM user WHERE user_id='$userid'";
     if ($db->query($sql) === TRUE) {
       } else {
@@ -176,7 +187,7 @@ if(isset($_GET['userid'])&&isset($_GET['action'])&&$_GET['action']=='admin'){
 		if($row['authority']=='admin'){
 			$error[] = 'The user is already admin.';
 		}else{
-		  $sql = "UPDATE user SET authority=admin";
+		  $sql = "UPDATE user SET authority='admin' WHERE user_id='$userid'";
           if ($db->query($sql) === TRUE) {
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;

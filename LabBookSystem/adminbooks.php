@@ -78,6 +78,12 @@ if(isset($_POST['submit'])&&isset($_POST['action'])&&$_POST['action']=='edit'){
 //if delete button has been clicked process it
 if(isset($_GET['bookid'])&&isset($_GET['action'])&&$_GET['action']=='delete'){
 	$bookid=$_GET['bookid'];
+	$sql = "DELETE FROM record WHERE book_id='$bookid'";
+    if ($db->query($sql) === TRUE) {
+      } else {
+         echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+	
 	$sql = "DELETE FROM book WHERE book_id='$bookid'";
     if ($db->query($sql) === TRUE) {
       } else {

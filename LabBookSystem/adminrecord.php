@@ -11,7 +11,7 @@ $title = 'Admin Page';
 if(isset($_GET['record'])&&isset($_GET['action'])){
 	$recordid=$_GET['record'];
 	$time=date("Y/m/d H:i:s");
-	$sql = "UPDATE book b, record r SET r.return_date='$time', returned=true, b.available=0 WHERE record_id='$recordid' and b.book_id=r.book_id";
+	$sql = "UPDATE book b, record r SET r.return_date='$time', returned=true, b.available=0 WHERE record_id='$recordid' and b.book_id=r.book_id and r.returned=0";
             if ($db->query($sql) === TRUE) {
             } else {
                echo "Error: " . $sql . "<br>" . $conn->error;
@@ -26,6 +26,21 @@ if(isset($_GET['record'])&&isset($_GET['action'])){
 //if delete button has been clicked process it
 if(isset($_GET['record'])&&!isset($_GET['action'])){
 	$recordid=$_GET['record'];
+	 $result = $db->query("SELECT * FROM record WHERE record_id='$recordid'");
+	 if ($result->num_rows > 0) {									  
+	   while($row = $result->fetch_assoc()){
+	     $bookid=$row['book_id'];
+		 $returned=$row['returned'];
+		 if($returned==false){
+			$sql ="UPDATE book SET available=0 WHERE book_id='$bookid'";
+			if ($db->query($sql) === TRUE) {
+            } else {
+               echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+		 }
+	   }
+	 }
+	
 	$sql = "DELETE FROM record WHERE record_id='$recordid'";
             if ($db->query($sql) === TRUE) {
             } else {
@@ -107,12 +122,13 @@ require('layout/adminheader.php');
                                             <th>BorrowDate</th>
                                             <th>ReturnDate</th>
 											<th>isReturned</th>
+											<th>borrower</th>
 											<th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 											<?php
-		                                     $result = $db->query("SELECT b.book_name, b.isbn, b.shelf_id, r.borrow_date, r.return_date, r.returned, r.record_id FROM book b, record r WHERE b.book_id=r.book_id");
+		                                     $result = $db->query("SELECT b.book_name, b.isbn, b.shelf_id, r.borrow_date, r.return_date, r.returned, r.record_id, u.user_name FROM book b, record r, user u WHERE b.book_id=r.book_id and r.user_id=u.user_id");
 											 if ($result->num_rows > 0) {
 												 
 											  while($row = $result->fetch_assoc()){
@@ -124,6 +140,7 @@ require('layout/adminheader.php');
 												echo "<td>".$row['borrow_date']."</td>";
 												echo "<td>".$row['return_date']."</td>";
 												if($row['returned']==0){echo "<td>NO</td>";}else{echo "<td>YES</td>";}
+												echo "<td>".$row['user_name']."</td>";
 												echo '<td><a class="btn btn-small btn-danger" href="adminrecord.php?record='.$recordid.'"><span class="glyphicon glyphicon-trash"></span>delete</a></td>';
 												echo '</tr>';
 											  }
@@ -155,11 +172,12 @@ require('layout/adminheader.php');
 											<th>Shelf</th>
                                             <th>BorrowDate</th>
                                             <th>ReturnDate</th>
+											<th>borrower</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 											<?php
-		                                     $result = $db->query("SELECT b.book_name, b.isbn, b.shelf_id, r.borrow_date, r.return_date FROM book b, record r WHERE b.book_id=r.book_id and r.returned=1");
+		                                     $result = $db->query("SELECT b.book_name, b.isbn, b.shelf_id, r.borrow_date, r.return_date, u.user_name FROM book b, record r, user u WHERE b.book_id=r.book_id and r.returned=1 and u.user_id=r.user_id");
 											 if ($result->num_rows > 0) {
 												 
 											  while($row = $result->fetch_assoc()){
@@ -169,6 +187,7 @@ require('layout/adminheader.php');
  												echo "<td>".$row['shelf_id']."</td>";
 												echo "<td>".$row['borrow_date']."</td>";
 												echo "<td>".$row['return_date']."</td>";
+												echo "<td>".$row['user_name']."</td>";
 												echo '</tr>';
 											  }
 											 }
@@ -187,7 +206,7 @@ require('layout/adminheader.php');
 													<!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Solved Borrow Record
+                            Unsolved Borrow Record
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -198,12 +217,13 @@ require('layout/adminheader.php');
                                             <th>ISBN</th>
 											<th>Shelf</th>
                                             <th>BorrowDate</th>
+											<th>borrower</th>
 											<th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 											<?php
-		                                     $result = $db->query("SELECT b.book_name, b.isbn, b.shelf_id, b.book_id, r.borrow_date, r.record_id FROM book b, record r WHERE b.book_id=r.book_id and r.returned=0");
+		                                     $result = $db->query("SELECT b.book_name, b.isbn, b.shelf_id, b.book_id, r.borrow_date, r.record_id, u.user_name FROM book b, record r, user u WHERE b.book_id=r.book_id and r.returned=0 and u.user_id=r.user_id");
 											 if ($result->num_rows > 0) {
 												 
 											  while($row = $result->fetch_assoc()){
@@ -213,6 +233,7 @@ require('layout/adminheader.php');
                                                 if($row['isbn']!=null){echo "<td>".$row['isbn']."</td>";}else{echo "<td>"."Collection"."</td>";}
  												echo "<td>".$row['shelf_id']."</td>";
 												echo "<td>".$row['borrow_date']."</td>";
+												echo "<td>".$row['user_name']."</td>";
 												echo '<td><a class="btn btn-small btn-primary" href="adminrecord.php?action=return&record='.$recordid.'"><i class="fa fa-reply"></i> return</a></td>';
 												
 												echo '</tr>';
