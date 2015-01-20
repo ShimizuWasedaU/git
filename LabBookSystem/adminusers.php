@@ -251,7 +251,7 @@ require('layout/adminheader.php');
               
 		              <!-- /. ROW  -->
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-12">
                      <!--    Hover Rows  -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -304,7 +304,7 @@ require('layout/adminheader.php');
                     <!-- End  Hover Rows  -->
                 </div>
 				
-				<div class="col-md-5 col-sm-5 fade hide" id="editPanel">
+				<div class="col-md-7 col-sm-7 fade hide" id="editPanel">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             Edit User Profile
