@@ -59,10 +59,10 @@
 					</li>
 				
                     <li>
-                        <a  id="profile" href="adminpage.php"><i class="fa fa-user fa-3x"></i> My Profile</a>
+                        <a  id="profile" href="adminpage.php"><i class="fa fa-user fa-2x"></i> My Profile</a>
                     </li>
 					<li>
-                        <a id="borrow" href="#"><i class="fa fa-list-alt fa-3x"></i>Borrow Record<span class="fa arrow"></span></a>
+                        <a id="borrow" href="#"><i class="fa fa-list-alt fa-2x"></i>Borrow Record<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
                             <li>
                                 <a href="adminborrow.php"><i class="fa fa-cog fa-x"></i> My Borrow Record</a>
@@ -73,10 +73,10 @@
 						</ul>
                     </li>
                       <li>
-                        <a id="users" href="adminusers.php"><i class="fa fa-group fa-3x"></i> Users Management</a>
+                        <a id="users" href="adminusers.php"><i class="fa fa-group fa-2x"></i> Users Management</a>
                     </li>
                     <li>
-                        <a id="book" href="adminbooks.php"><i class="fa fa-book fa-3x"></i>Books Management</a>
+                        <a id="book" href="adminbooks.php"><i class="fa fa-book fa-2x"></i>Books Management</a>
                     </li>	
                 </ul>
                
