@@ -46,13 +46,13 @@
 					</li>
 				
                     <li>
-                        <a  id="profile" href="memberpage.php"><i class="fa fa-user fa-3x"></i> My Profile</a>
+                        <a  id="profile" href="memberpage.php"><i class="fa fa-user fa-2x"></i> My Profile</a>
                     </li>
                       <li>
-                        <a id="borrow" href="memberborrow.php"><i class="fa fa-list-alt fa-3x"></i> Borrowing List</a>
+                        <a id="borrow" href="memberborrow.php"><i class="fa fa-list-alt fa-2x"></i> Borrowing List</a>
                     </li>
                     <li>
-                        <a id="book" href="memberbook.php"><i class="fa fa-book fa-3x"></i> Finding Book</a>
+                        <a id="book" href="memberbook.php"><i class="fa fa-book fa-2x"></i> Finding Book</a>
                     </li>	
                 </ul>
                
